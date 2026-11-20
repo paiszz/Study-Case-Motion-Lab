@@ -1,6 +1,16 @@
 
 import 'package:flutter/material.dart';
 
+class Task {
+  String title;
+  bool isCompleted;
+
+  Task({
+    required this.title,
+    this.isCompleted = false,
+  });
+}
+
 void main() {
   runApp(const MyApp());
 }
@@ -46,6 +56,31 @@ class MyHomePage extends StatefulWidget {
 
 
 class _MyHomePageState extends State<MyHomePage> {
+  List<Task> tasks = [];
+  final TextEditingController _taskController = TextEditingController();
+  
+  int get completedTasks =>
+    tasks.where((task) => task.isCompleted).length;
+
+  void _addTask() {
+    String title = _taskController.text.trim();
+
+    if (title.isEmpty) {
+      return;
+    }
+
+    setState(() {
+      tasks.add(Task(title: title));
+    });
+
+    _taskController.clear();
+  }
+
+  @override
+  void dispose() {
+    _taskController.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -112,9 +147,9 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       ),
                       const SizedBox(height: 12),
-                      const Text(
-                        '0 / 0',
-                        style: TextStyle(
+                      Text(
+                        '$completedTasks / ${tasks.length}',
+                        style: const TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.bold,
                           color: Color(0xFF65539E),
@@ -145,6 +180,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   children: [
                     Expanded(
                       child: TextField(
+                        controller: _taskController,
                         decoration: InputDecoration(
                           hintText: 'Enter your task...',
                           filled: true,
@@ -167,7 +203,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: IconButton(
-                        onPressed: () {},
+                        onPressed: _addTask,
                         icon: const Icon(
                           Icons.add,
                           color: Colors.white,
@@ -188,38 +224,54 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 const SizedBox(height: 12),
 
-                Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Row(
-                    children: [
-                      const Icon(
-                        Icons.circle_outlined,
-                        color: Color(0xFFA5A0B2),
+                Column(
+                  children: tasks.map((task) {
+                    return Container(
+                      width: double.infinity,
+                      margin: const EdgeInsets.only(bottom: 12),
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
                       ),
-                      const SizedBox(width: 12),
-                      const Expanded(
-                        child: Text(
-                          'Finish programming assignment',
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Color(0xFF292638),
+                      child: Row(
+                        children: [
+                          Checkbox(
+                            value: task.isCompleted,
+                            activeColor: const Color(0xFF8B75D7),
+                            onChanged: (value) {
+                              setState(() {
+                                task.isCompleted = value!;
+                              });
+                            },
                           ),
-                        ),
+                          Expanded(
+                            child: Text(
+                              task.title,
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: const Color(0xFF292638),
+                                decoration: task.isCompleted
+                                    ? TextDecoration.lineThrough
+                                    : TextDecoration.none,
+                              ),
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              setState(() {
+                                tasks.remove(task);
+                              });
+                            },
+                            icon: const Icon(
+                              Icons.delete_outline,
+                              color: Color(0xFFA5A0B2),
+                            ),
+                          ),
+                        ],
                       ),
-                      IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.delete_outline,
-                          color: Color(0xFFA5A0B2),
-                        ),
-                      ),
-                    ],
-                  ),
+                    );
+                  }).toList(),
                 ),
               ],
             ),
