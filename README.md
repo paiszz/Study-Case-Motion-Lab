@@ -1,17 +1,58 @@
-# study_case
+# Daynote - Your Personal Productivity Space
 
-A new Flutter project.
+Aplikasi *Mini Task Tracker* sederhana berbasis Flutter untuk membantu pengguna mencatat dan mengelola aktivitas sehari-hari.
 
-## Getting Started
+## Identitas
 
-This project is a starting point for a Flutter application.
+- **Nama:** Ridwan Faiz Herlambang
+- **NIM:** 103012400061
 
-A few resources to get you started if this is your first Flutter project:
+## Screenshot
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+![Daynote Android Screenshot](screenshots/daynote-android.png)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Cara Menjalankan
+
+Pastikan Flutter SDK sudah terinstal.
+
+1. Clone repository:
+
+   ```bash
+   git clone https://github.com/paiszz/Study-Case-Motion-Lab.git
+   ```
+
+2. Masuk ke direktori project:
+
+   ```bash
+   cd Study-Case-Motion-Lab
+   ```
+
+3. Instal dependencies:
+
+   ```bash
+   flutter pub get
+   ```
+
+4. Jalankan aplikasi:
+
+   ```bash
+   flutter run
+   ```
+   
+### Deklarasi Penggunaan AI
+
+- **Apakah menggunakan AI?** Ya
+
+- **Tool AI yang digunakan:** ChatGPT
+
+- **Estimasi persentase kontribusi AI:** 30%
+
+- **Bagian kode/fitur yang dibantu AI:**
+  - Penjelasan konsep dasar Flutter dan Dart.
+  - Referensi penggunaan komponen Flutter.
+  - Bantuan debugging dan identifikasi error.
+  - Panduan implementasi beberapa komponen dan pengelolaan state.
+
+- **Pernyataan:**
+
+  "Saya menyatakan bahwa saya memahami alur dan fungsi dari seluruh kode yang ada dalam repositori ini."
